@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Projects Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #1a202c;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: #718096;
+      font-size: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-top: 4px solid transparent;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .card.blue  { border-color: #4299e1; }
+    .card.green { border-color: #48bb78; }
+    .card.purple{ border-color: #9f7aea; }
+    .card.orange{ border-color: #ed8936; }
+
+    .icon { font-size: 2.2rem; }
+    .card h2 { font-size: 1.15rem; color: #1a202c; }
+    .card p { font-size: 0.9rem; color: #718096; line-height: 1.55; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #edf2f7;
+      color: #4a5568;
+    }
+    .card.blue  .tag { background: #ebf8ff; color: #2b6cb0; }
+    .card.green .tag { background: #f0fff4; color: #276749; }
+    .card.purple .tag { background: #faf5ff; color: #6b46c1; }
+    .card.orange .tag { background: #fffaf0; color: #c05621; }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #a0aec0;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚀 Mini Projects Hub</h1>
+    <p>4 standalone JavaScript mini-projects — click any card to open</p>
+  </header>
+
+  <div class="grid">
+    <a class="card blue" href="project1-tasks.html">
+      <div class="icon">📝</div>
+      <h2>Mini-Project 1: Task Manager</h2>
+      <p>A simple CRUD app to add, edit, complete, and delete tasks. Demonstrates DOM manipulation and array management.</p>
+      <div class="tag-row">
+        <span class="tag">Add</span>
+        <span class="tag">Edit</span>
+        <span class="tag">Delete</span>
+        <span class="tag">CRUD</span>
+      </div>
+    </a>
+
+    <a class="card green" href="project2-colors.html">
+      <div class="icon">🎨</div>
+      <h2>Mini-Project 2: Color Palette Generator</h2>
+      <p>Generates random color palettes with HEX codes. Click any color to copy it to the clipboard instantly.</p>
+      <div class="tag-row">
+        <span class="tag">Random colors</span>
+        <span class="tag">HEX codes</span>
+        <span class="tag">Copy to clipboard</span>
+      </div>
+    </a>
+
+    <a class="card purple" href="project3-table.html">
+      <div class="icon">📋</div>
+      <h2>Mini-Project 3: Table Generator</h2>
+      <p>Dynamically build data tables by adding rows with name, role, and status. Delete rows with one click.</p>
+      <div class="tag-row">
+        <span class="tag">Dynamic table</span>
+        <span class="tag">Add rows</span>
+        <span class="tag">Status badges</span>
+      </div>
+    </a>
+
+    <a class="card orange" href="project4-modal.html">
+      <div class="icon">💬</div>
+      <h2>Mini-Project 4: Modal / Popup</h2>
+      <p>A reusable modal dialog with overlay, open/close animations, confirm/cancel buttons, and keyboard support.</p>
+      <div class="tag-row">
+        <span class="tag">Modal</span>
+        <span class="tag">Overlay</span>
+        <span class="tag">Animation</span>
+        <span class="tag">ESC to close</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>All projects use vanilla HTML, CSS &amp; JavaScript — no frameworks or libraries needed.</footer>
+</body>
+</html>
