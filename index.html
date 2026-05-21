@@ -1,654 +1,137 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Projects</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Projects Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #1a202c;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: #718096;
+      font-size: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-top: 4px solid transparent;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .card.blue  { border-color: #4299e1; }
+    .card.green { border-color: #48bb78; }
+    .card.purple{ border-color: #9f7aea; }
+    .card.orange{ border-color: #ed8936; }
 
-  body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: #0f1117;
-    color: #e0e0e0;
-    min-height: 100vh;
-  }
+    .icon { font-size: 2.2rem; }
+    .card h2 { font-size: 1.15rem; color: #1a202c; }
+    .card p { font-size: 0.9rem; color: #718096; line-height: 1.55; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #edf2f7;
+      color: #4a5568;
+    }
+    .card.blue  .tag { background: #ebf8ff; color: #2b6cb0; }
+    .card.green .tag { background: #f0fff4; color: #276749; }
+    .card.purple .tag { background: #faf5ff; color: #6b46c1; }
+    .card.orange .tag { background: #fffaf0; color: #c05621; }
 
-  header {
-    background: #1a1d2e;
-    padding: 20px 30px;
-    border-bottom: 2px solid #2a2d3e;
-    text-align: center;
-  }
-
-  header h1 {
-    font-size: 2rem;
-    color: #7eb8f7;
-    letter-spacing: 2px;
-  }
-
-  /* NAV TABS */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-    flex-wrap: wrap;
-    background: #13161f;
-  }
-
-  nav button {
-    padding: 10px 22px;
-    border: 2px solid #2a2d3e;
-    background: #1a1d2e;
-    color: #a0a8c0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: all 0.2s;
-  }
-
-  nav button:hover { border-color: #7eb8f7; color: #7eb8f7; }
-  nav button.active { background: #7eb8f7; color: #0f1117; border-color: #7eb8f7; font-weight: bold; }
-
-  /* SECTIONS */
-  .section { display: none; padding: 30px; max-width: 900px; margin: 0 auto; }
-  .section.active { display: block; }
-
-  .section h2 {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    color: #7eb8f7;
-    border-bottom: 2px solid #2a2d3e;
-    padding-bottom: 10px;
-  }
-
-  /* CARD */
-  .card {
-    background: #1a1d2e;
-    border: 1px solid #2a2d3e;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .card h3 { color: #a0c4ff; margin-bottom: 14px; font-size: 1rem; }
-
-  /* INPUTS */
-  input[type="text"] {
-    width: 100%;
-    padding: 10px 14px;
-    background: #0f1117;
-    border: 1px solid #2a2d3e;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border 0.2s;
-  }
-
-  input[type="text"]:focus { border-color: #7eb8f7; }
-
-  button {
-    padding: 9px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: opacity 0.2s;
-  }
-
-  button:hover { opacity: 0.85; }
-
-  .btn-primary { background: #7eb8f7; color: #0f1117; font-weight: bold; }
-  .btn-danger  { background: #e05252; color: #fff; }
-  .btn-edit    { background: #4caf7d; color: #fff; }
-  .btn-sm      { padding: 5px 12px; font-size: 0.82rem; }
-
-  /* ========== PROJECT 1: TASK MANAGER ========== */
-  #task-form { display: flex; gap: 10px; margin-bottom: 16px; }
-  #task-form input { flex: 1; }
-
-  #task-list { list-style: none; }
-  #task-list li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    background: #0f1117;
-    border: 1px solid #2a2d3e;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    gap: 10px;
-  }
-
-  #task-list li span { flex: 1; }
-  #task-list li.done span { text-decoration: line-through; opacity: 0.5; }
-
-  .task-actions { display: flex; gap: 6px; }
-
-  /* Edit inline */
-  .task-edit-input {
-    flex: 1;
-    padding: 4px 8px;
-    background: #1a1d2e;
-    border: 1px solid #7eb8f7;
-    border-radius: 4px;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-  }
-
-  /* ========== PROJECT 2: COLOR PALETTE ========== */
-  #palette { display: flex; gap: 0; border-radius: 10px; overflow: hidden; margin-bottom: 14px; height: 80px; }
-  .color-box {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 6px;
-    font-size: 0.72rem;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    transition: flex 0.3s;
-    position: relative;
-  }
-  .color-box:hover { flex: 1.4; }
-  .color-box .copied-msg {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    pointer-events: none;
-  }
-  .color-box.flash .copied-msg { display: block; }
-
-  #palette-controls { display: flex; gap: 10px; }
-
-  /* ========== PROJECT 3: TABLE GENERATOR ========== */
-  #table-controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-  #table-controls input { width: 120px; }
-
-  #data-table-wrap { overflow-x: auto; }
-  #data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-
-  #data-table th {
-    background: #2a2d3e;
-    padding: 10px 14px;
-    text-align: left;
-    color: #7eb8f7;
-    font-weight: 600;
-  }
-
-  #data-table td {
-    padding: 9px 14px;
-    border-bottom: 1px solid #2a2d3e;
-    color: #c0c8d8;
-  }
-
-  #data-table tr:hover td { background: #1e2133; }
-
-  .status-active   { color: #4caf7d; font-weight: bold; }
-  .status-pending  { color: #f0b429; font-weight: bold; }
-  .status-inactive { color: #e05252; font-weight: bold; }
-
-  #table-add-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-  #table-add-row input { flex: 1; min-width: 100px; }
-  #row-status {
-    padding: 10px 14px;
-    background: #0f1117;
-    border: 1px solid #2a2d3e;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    cursor: pointer;
-  }
-
-  /* ========== PROJECT 4: MODAL ========== */
-  #modal-demo { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-
-  /* Overlay */
-  #modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  #modal-overlay.show { display: flex; }
-  #modal-overlay.visible { opacity: 1; }
-
-  #modal-box {
-    background: #1a1d2e;
-    border: 1px solid #2a2d3e;
-    border-radius: 12px;
-    padding: 28px;
-    width: 90%;
-    max-width: 460px;
-    position: relative;
-    transform: translateY(30px);
-    transition: transform 0.25s;
-  }
-
-  #modal-overlay.visible #modal-box { transform: translateY(0); }
-
-  #modal-box h3 { font-size: 1.2rem; color: #7eb8f7; margin-bottom: 10px; }
-  #modal-box p  { color: #a0a8c0; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; }
-
-  #modal-close-x {
-    position: absolute;
-    top: 14px; right: 14px;
-    background: transparent;
-    border: none;
-    color: #a0a8c0;
-    font-size: 1.3rem;
-    cursor: pointer;
-    line-height: 1;
-  }
-
-  #modal-close-x:hover { color: #e05252; }
-
-  #modal-footer { display: flex; gap: 10px; justify-content: flex-end; }
-  #modal-footer .btn-cancel { background: #2a2d3e; color: #a0a8c0; }
-
-  /* Custom modal builder */
-  #custom-modal-form { display: flex; flex-direction: column; gap: 10px; }
-  #custom-modal-form textarea {
-    width: 100%;
-    padding: 10px 14px;
-    background: #0f1117;
-    border: 1px solid #2a2d3e;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-    resize: vertical;
-    min-height: 70px;
-    outline: none;
-  }
-
-  /* Features list */
-  .features { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
-  .features span { color: #4caf7d; font-size: 0.85rem; }
-  .features span::before { content: "✓ "; }
-
-  /* Empty state */
-  .empty { color: #4a5068; text-align: center; padding: 20px; font-size: 0.9rem; }
-</style>
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #a0aec0;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>🚀 Mini Projects Hub</h1>
+    <p>4 standalone JavaScript mini-projects — click any card to open</p>
+  </header>
 
-<header>
-  <h1>🚀 Mini Projects — JS &amp; CSS</h1>
-</header>
+  <div class="grid">
+    <a class="card blue" href="project1-tasks.html">
+      <div class="icon">📝</div>
+      <h2>Mini-Project 1: Task Manager</h2>
+      <p>A simple CRUD app to add, edit, complete, and delete tasks. Demonstrates DOM manipulation and array management.</p>
+      <div class="tag-row">
+        <span class="tag">Add</span>
+        <span class="tag">Edit</span>
+        <span class="tag">Delete</span>
+        <span class="tag">CRUD</span>
+      </div>
+    </a>
 
-<nav>
-  <button class="active" onclick="showSection('tasks')">📋 Task Manager</button>
-  <button onclick="showSection('colors')">🎨 Color Palette</button>
-  <button onclick="showSection('table')">📊 Table Generator</button>
-  <button onclick="showSection('modal')">💬 Modal / Popup</button>
-</nav>
+    <a class="card green" href="project2-colors.html">
+      <div class="icon">🎨</div>
+      <h2>Mini-Project 2: Color Palette Generator</h2>
+      <p>Generates random color palettes with HEX codes. Click any color to copy it to the clipboard instantly.</p>
+      <div class="tag-row">
+        <span class="tag">Random colors</span>
+        <span class="tag">HEX codes</span>
+        <span class="tag">Copy to clipboard</span>
+      </div>
+    </a>
 
-<!-- ==============================
-     PROJECT 1: TASK MANAGER
-     ============================== -->
-<section id="tasks" class="section active">
-  <h2>📋 Mini-Project 1: Task Manager</h2>
+    <a class="card purple" href="project3-table.html">
+      <div class="icon">📋</div>
+      <h2>Mini-Project 3: Table Generator</h2>
+      <p>Dynamically build data tables by adding rows with name, role, and status. Delete rows with one click.</p>
+      <div class="tag-row">
+        <span class="tag">Dynamic table</span>
+        <span class="tag">Add rows</span>
+        <span class="tag">Status badges</span>
+      </div>
+    </a>
 
-  <div class="card">
-    <h3>➕ Add Task</h3>
-    <div id="task-form">
-      <input type="text" id="taskInput" placeholder="اكتب مهمة جديدة...">
-      <button class="btn-primary" onclick="addTask()">إضافة</button>
-    </div>
-    <ul id="task-list">
-      <li class="done">
-        <span>Buy groceries</span>
-        <div class="task-actions">
-          <button class="btn-edit btn-sm" onclick="startEdit(this)">Edit</button>
-          <button class="btn-danger btn-sm" onclick="deleteTask(this)">Delete</button>
-        </div>
-      </li>
-      <li>
-        <span>Walk the dog</span>
-        <div class="task-actions">
-          <button class="btn-edit btn-sm" onclick="startEdit(this)">Edit</button>
-          <button class="btn-danger btn-sm" onclick="deleteTask(this)">Delete</button>
-        </div>
-      </li>
-      <li>
-        <span>Read book</span>
-        <div class="task-actions">
-          <button class="btn-edit btn-sm" onclick="startEdit(this)">Edit</button>
-          <button class="btn-danger btn-sm" onclick="deleteTask(this)">Delete</button>
-        </div>
-      </li>
-    </ul>
-    <p id="empty-tasks" class="empty" style="display:none">لا توجد مهام. أضف واحدة! 📝</p>
+    <a class="card orange" href="project4-modal.html">
+      <div class="icon">💬</div>
+      <h2>Mini-Project 4: Modal / Popup</h2>
+      <p>A reusable modal dialog with overlay, open/close animations, confirm/cancel buttons, and keyboard support.</p>
+      <div class="tag-row">
+        <span class="tag">Modal</span>
+        <span class="tag">Overlay</span>
+        <span class="tag">Animation</span>
+        <span class="tag">ESC to close</span>
+      </div>
+    </a>
   </div>
 
-  <div class="card">
-    <div class="features">
-      <span>Add task</span>
-      <span>Display list</span>
-      <span>Edit task</span>
-      <span>Delete task</span>
-      <span>Mark done</span>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     PROJECT 2: COLOR PALETTE
-     ============================== -->
-<section id="colors" class="section">
-  <h2>🎨 Mini-Project 2: Color Palette Generator</h2>
-
-  <div class="card">
-    <h3>🖌️ Color Palette Preview</h3>
-    <div id="palette"></div>
-    <div id="palette-controls">
-      <button class="btn-primary" onclick="generatePalette()">🔄 Generate New</button>
-      <button style="background:#2a2d3e;color:#a0a8c0;" onclick="copyAll()">📋 Copy All HEX</button>
-    </div>
-    <p style="margin-top:10px;font-size:0.82rem;color:#4a5068;">انقر على أي لون لنسخ كوده</p>
-  </div>
-
-  <div class="card">
-    <div class="features">
-      <span>Random colors</span>
-      <span>HEX display</span>
-      <span>Click to copy</span>
-      <span>Visual feedback</span>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     PROJECT 3: TABLE GENERATOR
-     ============================== -->
-<section id="table" class="section">
-  <h2>📊 Mini-Project 3: Table Generator</h2>
-
-  <div class="card">
-    <h3>⚙️ Generated Table</h3>
-    <div id="data-table-wrap">
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>ID</th><th>Name</th><th>Role</th><th>Status</th><th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-      </table>
-    </div>
-
-    <div id="table-add-row">
-      <input type="text" id="col-name" placeholder="Name">
-      <input type="text" id="col-role" placeholder="Role">
-      <select id="row-status">
-        <option value="Active">Active</option>
-        <option value="Pending">Pending</option>
-        <option value="Inactive">Inactive</option>
-      </select>
-      <button class="btn-primary" onclick="addRow()">+ Add Row</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="features">
-      <span>Dynamic rows</span>
-      <span>Status colors</span>
-      <span>Delete rows</span>
-      <span>Auto ID</span>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     PROJECT 4: MODAL / POPUP
-     ============================== -->
-<section id="modal" class="section">
-  <h2>💬 Mini-Project 4: Modal / Popup</h2>
-
-  <div class="card">
-    <h3>🔘 Open Modals</h3>
-    <div id="modal-demo">
-      <button class="btn-primary" onclick="openModal('Default Modal','This is the modal content. You can put any HTML content here including forms, images, or text.')">Open Default Modal</button>
-      <button style="background:#9c59d1;color:#fff;" onclick="openModal('Warning!','Are you sure you want to delete this item? This action cannot be undone.')">Warning Modal</button>
-      <button style="background:#4caf7d;color:#fff;" onclick="openModal('Success 🎉','Your changes have been saved successfully!')">Success Modal</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>✏️ Custom Modal Builder</h3>
-    <div id="custom-modal-form">
-      <input type="text" id="modal-title-input" placeholder="Modal Title">
-      <textarea id="modal-content-input" placeholder="Modal content..."></textarea>
-      <button class="btn-primary" onclick="openCustomModal()">Preview Custom Modal</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="features">
-      <span>Show / Hide</span>
-      <span>CSS animation</span>
-      <span>Close on overlay</span>
-      <span>Custom content</span>
-    </div>
-  </div>
-</section>
-
-<!-- MODAL OVERLAY -->
-<div id="modal-overlay" onclick="overlayClick(event)">
-  <div id="modal-box">
-    <button id="modal-close-x" onclick="closeModal()">✕</button>
-    <h3 id="modal-title">Modal Title</h3>
-    <p id="modal-content">Content goes here.</p>
-    <div id="modal-footer">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="closeModal()">Confirm</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// ==================== NAV ====================
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
-}
-
-// ==================== PROJECT 1: TASKS ====================
-function addTask() {
-  const input = document.getElementById('taskInput');
-  const text = input.value.trim();
-  if (!text) return;
-  const list = document.getElementById('task-list');
-  const li = createTaskItem(text);
-  list.appendChild(li);
-  input.value = '';
-  checkEmpty();
-}
-
-function createTaskItem(text) {
-  const li = document.createElement('li');
-  li.innerHTML = `
-    <span onclick="toggleDone(this)" style="cursor:pointer">${text}</span>
-    <div class="task-actions">
-      <button class="btn-edit btn-sm" onclick="startEdit(this)">Edit</button>
-      <button class="btn-danger btn-sm" onclick="deleteTask(this)">Delete</button>
-    </div>`;
-  return li;
-}
-
-function toggleDone(span) {
-  span.parentElement.classList.toggle('done');
-}
-
-function deleteTask(btn) {
-  btn.closest('li').remove();
-  checkEmpty();
-}
-
-function startEdit(btn) {
-  const li = btn.closest('li');
-  const span = li.querySelector('span');
-  if (span) {
-    const val = span.textContent;
-    const inp = document.createElement('input');
-    inp.className = 'task-edit-input';
-    inp.value = val;
-    li.replaceChild(inp, span);
-    btn.textContent = 'Save';
-    btn.onclick = () => saveEdit(btn, inp);
-    inp.focus();
-    inp.addEventListener('keydown', e => { if (e.key === 'Enter') saveEdit(btn, inp); });
-  }
-}
-
-function saveEdit(btn, inp) {
-  const li = btn.closest('li');
-  const span = document.createElement('span');
-  span.textContent = inp.value.trim() || inp.value;
-  span.onclick = () => li.classList.toggle('done');
-  span.style.cursor = 'pointer';
-  li.replaceChild(span, inp);
-  btn.textContent = 'Edit';
-  btn.onclick = () => startEdit(btn);
-}
-
-function checkEmpty() {
-  const list = document.getElementById('task-list');
-  document.getElementById('empty-tasks').style.display =
-    list.children.length === 0 ? 'block' : 'none';
-}
-
-// Allow Enter key in task input
-document.getElementById('taskInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTask();
-});
-
-// ==================== PROJECT 2: COLOR PALETTE ====================
-function randomColor() {
-  const r = Math.floor(Math.random() * 220) + 20;
-  const g = Math.floor(Math.random() * 220) + 20;
-  const b = Math.floor(Math.random() * 220) + 20;
-  return { r, g, b, hex: '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('').toUpperCase() };
-}
-
-function generatePalette() {
-  const palette = document.getElementById('palette');
-  palette.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
-    const c = randomColor();
-    const box = document.createElement('div');
-    box.className = 'color-box';
-    box.style.background = c.hex;
-    box.innerHTML = `${c.hex}<div class="copied-msg">Copied!</div>`;
-    box.addEventListener('click', () => copyColor(box, c.hex));
-    palette.appendChild(box);
-  }
-}
-
-function copyColor(box, hex) {
-  navigator.clipboard.writeText(hex).catch(() => {});
-  box.classList.add('flash');
-  setTimeout(() => box.classList.remove('flash'), 1000);
-}
-
-function copyAll() {
-  const hexes = [...document.querySelectorAll('.color-box')].map(b => b.style.background);
-  navigator.clipboard.writeText(hexes.join(', ')).catch(() => {});
-  alert('All colors copied!');
-}
-
-generatePalette();
-
-// ==================== PROJECT 3: TABLE GENERATOR ====================
-let rowId = 0;
-
-const initialData = [
-  ['John Doe', 'Developer', 'Active'],
-  ['Jane Smith', 'Designer', 'Pending'],
-  ['Bob Johnson', 'Manager', 'Active'],
-  ['Alice Brown', 'QA Engineer', 'Inactive'],
-];
-
-function statusClass(s) {
-  return s === 'Active' ? 'status-active' : s === 'Pending' ? 'status-pending' : 'status-inactive';
-}
-
-function addRow(name, role, status) {
-  const n = name || document.getElementById('col-name').value.trim();
-  const r = role || document.getElementById('col-role').value.trim();
-  const s = status || document.getElementById('row-status').value;
-  if (!n || !r) { alert('Name and Role are required'); return; }
-
-  rowId++;
-  const tbody = document.getElementById('table-body');
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td>${rowId}</td>
-    <td>${n}</td>
-    <td>${r}</td>
-    <td class="${statusClass(s)}">${s}</td>
-    <td><button class="btn-danger btn-sm" onclick="this.closest('tr').remove()">Delete</button></td>`;
-  tbody.appendChild(tr);
-
-  if (!name) {
-    document.getElementById('col-name').value = '';
-    document.getElementById('col-role').value = '';
-  }
-}
-
-initialData.forEach(([n,r,s]) => addRow(n, r, s));
-
-// ==================== PROJECT 4: MODAL ====================
-function openModal(title, content) {
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-content').textContent = content;
-  const overlay = document.getElementById('modal-overlay');
-  overlay.classList.add('show');
-  requestAnimationFrame(() => overlay.classList.add('visible'));
-}
-
-function openCustomModal() {
-  const t = document.getElementById('modal-title-input').value.trim() || 'Custom Modal';
-  const c = document.getElementById('modal-content-input').value.trim() || 'No content provided.';
-  openModal(t, c);
-}
-
-function closeModal() {
-  const overlay = document.getElementById('modal-overlay');
-  overlay.classList.remove('visible');
-  setTimeout(() => overlay.classList.remove('show'), 250);
-}
-
-function overlayClick(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModal();
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-</script>
+  <footer>All projects use vanilla HTML, CSS &amp; JavaScript — no frameworks or libraries needed.</footer>
 </body>
 </html>
